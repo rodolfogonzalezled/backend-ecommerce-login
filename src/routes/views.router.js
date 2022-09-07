@@ -17,4 +17,9 @@ router.get('/login', (req, res) => {
     res.render('pages/login');
 })
 
+router.get('/register', (req, res) => {
+    if (req.session?.user) return res.redirect('/');
+    res.render('pages/register');
+})
+
 export default router;

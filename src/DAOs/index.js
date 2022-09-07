@@ -10,9 +10,9 @@ import CartsFileDao from './carritos/carritosDaoArchivo.js';        // fileSyste
 // ---------------------- MARIADB Y SQLITE3 ---------------------
 import { knexMariaDB } from '../Config/mariaDB.js';
 import { knexSQLite } from '../Config/mySqlite3.js';
-import ClientDB from '../clientDB.js';
-import { createTableChat } from '../createTableChat.js';
-import { createTableProducts } from '../createTableProducts.js';
+import ClientDB from '../DB/clientDB.js';
+import { createTableChat } from '../DB/createTableChat.js';
+import { createTableProducts } from '../DB/createTableProducts.js';
 
 // ---------------------- MONGODB --------------------------------
 import ProductsMongoDBDao from './productos/productosDaoMongoDb.js'; // MongoDB

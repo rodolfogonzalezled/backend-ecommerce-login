@@ -1,15 +1,17 @@
+const name = document.getElementById("name");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 
-function login(e) {
+function register(e) {
     e.preventDefault();
 
     let user = {
+        name: name.value,
         email: email.value,
         password: password.value
     };
 
-    fetch('/api/session/login', {
+    fetch('/api/session/register', {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {
@@ -28,7 +30,7 @@ function login(e) {
     }).catch(error => {
         console.log(error);
         if(error.message == 500) {
-            swal("Login error", '', "error");
+            swal("Register error", '', "error");
         }
     });
 }

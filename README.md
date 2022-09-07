@@ -18,7 +18,7 @@
     - Se instala los modulos via npm:
         - npm init - y
         - npm install express-session
-3.	Iniciar la app desde la terminal en la carpeta del proyecto a revisar. ( node start )
+3.	Iniciar la app desde la terminal en la carpeta del proyecto a revisar. ( npm start )
 4.	El proyecto se ejecutará en el navegador en ( http://localhost:9090 )  
 
 # Vistas:

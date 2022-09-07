@@ -10,6 +10,8 @@ import productsRouter from './src/routes/product.router.js';
 import cartsRouter from './src/routes/cart.router.js';
 import chatRouter from './src/routes/chat.router.js';
 import sessionRouter from './src/routes/session.router.js';
+import passport from 'passport';
+import initializePassport from './src/Config/passport.config.js';
 
 const app = express();
 const httpServer = createServer(app);
@@ -19,7 +21,7 @@ app.use(session({
     store: MongoStore.create({
         mongoUrl: "mongodb+srv://rgonzalezled:18940461@cluster0.mstabwq.mongodb.net/ecommerce?retryWrites=true&w=majority",
         mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
-        ttl: 60
+        ttl: 3600
     }),
     secret: "CoderSecret",
     resave: false,
@@ -34,6 +36,9 @@ app.use('/api/carrito', cartsRouter);
 app.use('/api/mensajes', chatRouter);
 app.use('/api/session', sessionRouter);
 
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));               // con http://localhost:9090/

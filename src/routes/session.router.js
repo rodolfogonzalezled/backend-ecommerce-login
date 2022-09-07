@@ -1,28 +1,37 @@
 import { Router } from "express";
+import passport from 'passport';
 
 const router = Router();
 
-router.post('/login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        if (!email || !password) return res.status(400).send({ error: "Incomplete values" })
-        // const user = await userService.findOne({$and:[{email:email},{password:password}]},{name:1,email:1});
-        if (email != 'admin@gmail.com' || password != '123') return res.status(400).send({ error: 'User not found' });
-        req.session.user = {
-            email,
-            password
-        };
-        res.send({ status: "success", payload: user })
-    } catch (error) {
-        res.status(500).send({ error: error })
+router.post('/login',passport.authenticate('login',{failureRedirect:'/api/session/loginfail'}),async(req,res)=>{
+    req.session.user = {
+        name:req.user.name,
+        email:req.user.email,
+        id:req.user._id
     }
+    res.send({status:"success", payload:req.user._id});
+});
+
+router.get('/loginfail', (req,res)=>{
+    console.log("login failed");
+    res.status(500).send({status:"error", error:"Login failed"});
 })
 
 router.get('/logout', async (req, res) => {
-    req.session.destroy(err => {
-        if (err) return res.status(500).send("error");
-        res.send("ok")
+    req.session.destroy(error => {
+        if (error) return res.status(500).send({status:"error", error:"Logout error"});
+        res.status(200).send("ok");
     })
-})
+});
+
+router.post('/register', passport.authenticate('register', {failureRedirect:'/api/session/registerFail'}), async (req, res) => {
+    console.log(req.user)
+    res.send({status: "success", payload: req.user.id});
+});
+
+router.get('/registerFail', async(req,res) => {
+    console.log("Register Failed");
+    res.status(500).send({status: "error", error: "Register failed"});
+});
 
 export default router;
