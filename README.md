@@ -4,11 +4,8 @@
 
 - Se presenta un mecanismo que permite loguear a un cliente mediante un formulario de ingreso.
 
-- Se agregaron las nuevas rutas /session/login y /session/logout, para login por ahora se esta validando con el siguiente usuario:
-```
-  email: admin@gmail.com
-  password: 123
-```
+- Se agregaron las nuevas rutas /session/login y /session/logout
+
 # Para su prueba se puede realizar con Postman y en la vista
 
 # Para su prueba en front:
@@ -24,7 +21,7 @@
 # Vistas:
 - Pagina principal de Login para introducir en un formulario de ingreso un correo y contraseña que permite acceder a las rutas.
 - Boton de deslogueo para cerrar la sesion activa.
-- Cierre de sesion automatico por tiempo de inactividad durante un minuto, lo cual pedira iniciar sesion nuevamente.
+- Cierre de sesion automatico por tiempo de inactividad, lo cual pedira iniciar sesion nuevamente.
 
 
 
