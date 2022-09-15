@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
+import { config } from "../../Config/config.js";
 
 export const connectMongo = async () => {
-    const URL = "mongodb+srv://rgonzalezled:18940461@cluster0.mstabwq.mongodb.net/ecommerce?retryWrites=true&w=majority";
+    const URL = config.urlMongoDB;
     await mongoose.connect(URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,

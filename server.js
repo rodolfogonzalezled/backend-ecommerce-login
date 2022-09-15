@@ -19,11 +19,11 @@ const io = new Server(httpServer);
 
 app.use(session({
     store: MongoStore.create({
-        mongoUrl: "mongodb+srv://rgonzalezled:18940461@cluster0.mstabwq.mongodb.net/ecommerce?retryWrites=true&w=majority",
+        mongoUrl: config.urlMongoDB,
         mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
         ttl: 10000
     }),
-    secret: "CoderSecret",
+    secret: config.secretSession,
     resave: false,
     saveUninitialized: false
 }))
