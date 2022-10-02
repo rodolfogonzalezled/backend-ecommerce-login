@@ -24,8 +24,7 @@ export default class MongoContainer {
     async getById(id) {
         try {
             let element = await this.model.findById(id, { __v: 0 });
-            return element;
-
+            return element._doc;
         } catch (error) {
             console.log(error);
         }

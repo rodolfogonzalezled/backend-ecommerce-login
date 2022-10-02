@@ -129,6 +129,7 @@ socket.on("productos", (productos) => {
         let btnAgregarCarrito = document.getElementById(`btnAgregarCarrito${producto.id}`);
         btnAgregarCarrito.addEventListener('click', () => {
             agregarAlCarrito(producto.id)
+            swal("Elemento agregado al carrito", '', "success", {button: false, timer: 1000});
         });
 
         let btnBorrarProducto = document.getElementById(`btnBorrarProducto${producto.id}`);

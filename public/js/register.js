@@ -30,7 +30,7 @@ function register(e) {
     }).catch(error => {
         console.log(error);
         if(error.message == 500) {
-            swal("Register error", '', "error");
+            swal("Register error", '', "error", {button: false, timer: 1000});
         }
     });
 }

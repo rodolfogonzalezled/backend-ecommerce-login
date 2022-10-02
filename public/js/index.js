@@ -11,7 +11,7 @@ btnLogout.addEventListener('click', evt => {
     .catch(error => {
         console.log(error);
         if(error.message == 500) {
-            swal("Logout error", '', "error");
+            swal("Logout error", '', "error", {button: false, timer: 1000});
         }
     });
 })

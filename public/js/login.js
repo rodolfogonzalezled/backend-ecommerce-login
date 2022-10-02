@@ -28,7 +28,7 @@ function login(e) {
     }).catch(error => {
         console.log(error);
         if(error.message == 500) {
-            swal("Login error", '', "error");
+            swal("Login error", '', "error", {button: true, timer: 5000});
         }
     });
 }

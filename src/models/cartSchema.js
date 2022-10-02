@@ -16,6 +16,6 @@ cartSchema.set("toJSON", {
     }
 });
 
-const cartsModel = mongoose.model('carritos', cartSchema);
+const cartsModel = mongoose.model(cartCollectionName, cartSchema);
 
-export { cartSchema, cartsModel};
+export { cartSchema, cartsModel };

@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 
 export const authorSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true},
-    nombre: { type: String, required: true },
-    apellido: { type: String, required: true },
-    edad: { type: Number, required: true },
-    alias: { type: String, required: true },
-    avatar: { type: String, required: true }
+    nombre: { type: String },
+    apellido: { type: String },
+    edad: { type: Number },
+    alias: { type: String },
+    avatar: { type: String }
 });
 
 authorSchema.set("toJSON", {

@@ -27,7 +27,7 @@ function borrarMensajes(id) {
 }
 
 socket.on("mensajes", (mensajes) => {
-    
+    debugger;
     document.getElementById('sinMensajes').style.display = 'none';
     document.getElementById('listaMensajes').style.display = 'block';
     contenedorMensajesHtml.innerHTML = "";

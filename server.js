@@ -61,9 +61,18 @@ io.on("connection", async (socket) => {
         socket.emit("productos", await products.getAll());
     });
 
-    socket.emit("mensajes", await chat.getAll());
+    socket.emit("mensajes", obtenerMensajes());
+
+    async function obtenerMensajes() {
+        let mensajes = await chat.getAll();
+        console.log(mensajes);
+        return {
+            mensaje: mensajes.text
+        };
+    }
     socket.on('mensajeNuevo', async data => {
-        chat.add(data);
+        console.log(data)
+        chat.add( { autor: { email: data.autor }, text: data.mensaje });
         socket.emit("mensajes", await chat.getAll());
     });
 

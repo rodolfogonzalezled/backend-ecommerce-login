@@ -12,6 +12,11 @@ router.get('/carrito', (req, res) => {
     res.render('pages/carrito')
 });
 
+router.get('/chat', (req, res) => {
+    if (!req.session?.user) return res.redirect('/login');
+    res.render('pages/chat')
+});
+
 router.get('/login', (req, res) => {
     if (req.session?.user) return res.redirect('/');
     res.render('pages/login');

@@ -3,11 +3,11 @@ let contenedorProductosCarrito = document.getElementById('productosCarrito');
 let btnBorrarCarrito = document.getElementById(`btnBorrarCarrito`);
 btnBorrarCarrito.addEventListener('click', () => {
     borrarCarrito(window.localStorage.getItem('idCarrito'))
+    swal("Elementos borrados del carrito", '', "error", {button: false, timer: 1000});
 });
 
 function agregarAlCarrito(id) {
     let idCarrito = window.localStorage.getItem('idCarrito');
-
     if (idCarrito) {
         fetch(`/api/carrito/${idCarrito}/productos`, {
             method: 'POST',
@@ -92,10 +92,11 @@ function pintarCarrito(productos) {
     productos.map((producto) => {
         let divContenedor = document.createElement("li");
         divContenedor.classList.add("list-group-item");
+        let id = producto.id ? producto.id : producto._id;
         divContenedor.innerHTML = `
             <div class="row" style="text-align: center">
                 <div class="col">
-                    <img style="border-radius: 8%; width: 33%; height: 5em; border: solid 1px" src="${producto.foto}">
+                    <img style="border-radius: 8%; width: 28%; height: 5em; border: solid 1px" src="${producto.foto}">
                 </div>
                 <div class="col text-left">
                     <div class="col"><b>Nombre:</b> ${producto.nombre}</div>
@@ -106,15 +107,14 @@ function pintarCarrito(productos) {
                     <div class="col py-4"><b>Cantidad:</b> ${producto.cantidad}</div>
                 </div>
                 <div class="col text-center">
-                    <a><i id="btnBorrarPorId${producto.id}" class="bi bi-trash btn btn-danger"></i></a>
+                    <a><i id="btnBorrarPorId${id}" class="bi bi-trash btn btn-danger"></i></a>
                 </div>
             </div>
             `;
         contenedorProductosCarrito.appendChild(divContenedor);
-
-        let btnBorrarPorId = document.getElementById(`btnBorrarPorId${producto.id}`);
+        let btnBorrarPorId = document.getElementById(`btnBorrarPorId${id}`);
         btnBorrarPorId.addEventListener('click', () => {
-            borrarProductoCarrito(producto.id)
+            borrarProductoCarrito(id)
         });
     })
 }
