@@ -89,4 +89,5 @@ io.on("connection", async (socket) => {
     socket.on('buscarCarrito', async (id) => {
         socket.emit("carritos", await carts.getById(id));
     });
+    
 });
