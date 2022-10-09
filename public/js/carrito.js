@@ -6,6 +6,12 @@ btnBorrarCarrito.addEventListener('click', () => {
     swal("Elementos borrados del carrito", '', "error", {button: false, timer: 1000});
 });
 
+let btnFinalizarCarrito = document.getElementById(`btnFinalizarCarrito`);
+btnFinalizarCarrito.addEventListener('click', () => {
+    finalizarCarrito(window.localStorage.getItem('idCarrito'))
+    swal("Compra finalizada", '', "success", {button: false, timer: 2000});
+});
+
 function agregarAlCarrito(id) {
     let idCarrito = window.localStorage.getItem('idCarrito');
     if (idCarrito) {
@@ -76,6 +82,22 @@ function borrarCarrito() {
         .catch(error => console.error('Error:', error));
 }
 
+function finalizarCarrito() {
+    let idCarrito = window.localStorage.getItem('idCarrito');
+    fetch(`/api/carrito/${idCarrito}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(() => {
+            socket.emit("buscarCarrito", idCarrito);
+            window.localStorage.removeItem('idCarrito');
+            document.getElementById('btnBorrarCarrito').classList.add('disabled');
+        })
+        .catch(error => console.error('Error:', error));
+}
+
 socket.on("carritos", (carritos) => {
     pintarCarrito(carritos.productos);
 });
@@ -83,6 +105,7 @@ socket.on("carritos", (carritos) => {
 function pintarCarrito(productos) {
     if (productos.length) {
         document.getElementById('btnBorrarCarrito').classList.remove('disabled');
+        document.getElementById('btnFinalizarCarrito').classList.remove('disabled');
         document.getElementById('carritoVacio').style.display = 'none';
     } else {
         document.getElementById('btnBorrarCarrito').classList.add('disabled');

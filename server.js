@@ -65,7 +65,6 @@ io.on("connection", async (socket) => {
 
     async function obtenerMensajes() {
         let mensajes = await chat.getAll();
-        console.log(mensajes);
         return {
             mensaje: mensajes.text
         };
